@@ -29,7 +29,7 @@ jobs:
           prerelease: false
       - name: build RPM package
         id: rpm_build
-        uses: naveenrajm7/rpmbuild@master
+        uses: jtakaki-matc/pam_oauth2_device@master
         with:
           spec_file: "./packaging/rpm/pamoauth2device.spec"
 
