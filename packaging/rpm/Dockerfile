@@ -24,6 +24,8 @@ RUN mkdir -p rpmbuild/SOURCES \
  && cd rpmbuild/SOURCES \
  && curl -L -O https://github.com/stfc/pam_oauth2_device/archive/v${PACKAGE_VERSION}.tar.gz
 
+WORKDIR /home/builder
+
 COPY pamoauth2device.spec .
 
 USER root
