@@ -1,8 +1,9 @@
 name: build rpm on release
 
 on:
-  release:
-    types: [created]
+  push:
+  #release:
+    #types: [created]
 
 jobs:
   build:
