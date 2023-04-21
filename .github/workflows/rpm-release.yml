@@ -11,5 +11,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: |
-        docker build --file ./packaging/rpm/Dockerfile -t pamoauth2device-rpm-build .
+        docker build --file ./packaging/rpm -t pamoauth2device-rpm-build .
         docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r 'rpmbuild/RPMS /data'
