@@ -16,10 +16,10 @@ jobs:
       run: |
           cd ./packaging/rpm
           docker build -t pamoauth2device-rpm-build .
-          #docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r 'rpmbuild/RPMS /data'
+          docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r 'rpmbuild/RPMS /data'
     
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: PAM oauth2 RPMs
-        path: ${{ steps.rpm.outputs.rpm_dir_path}}
+        path: /data/RPMS
