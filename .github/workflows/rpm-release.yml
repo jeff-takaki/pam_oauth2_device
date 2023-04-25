@@ -15,7 +15,7 @@ jobs:
       id: rpm
       run: |
           cd ./packaging/rpm
-          ls -la
+          pwd
           #docker build -t pamoauth2device-rpm-build .
           #docker run  --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
     
