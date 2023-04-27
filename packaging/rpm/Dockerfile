@@ -18,7 +18,7 @@ RUN groupadd builder \
 # This version must be identical to the version in pamoauth2device.spec
 ENV PACKAGE_VERSION=0.1
 
-WORKDIR /home/builder
+#WORKDIR /home/builder
 
 RUN mkdir -p rpmbuild/SOURCES \
  && cd rpmbuild/SOURCES \
