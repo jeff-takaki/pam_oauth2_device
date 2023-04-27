@@ -10,20 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - name: build rpm 
-      id: rpm
-      run: |
-          cd ./packaging/rpm
-          echo $USER
-          docker build -t pamoauth2device-rpm-build .
-          docker exec -t -i pamoauth2device-rpm-build /bin/bash
-          docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build 
-  
-
-           
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
+    -
+      name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    -
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    -
+      name: Build and push
+      uses: docker/build-push-action@v4
       with:
-        name: PAM oauth2 RPMs
-        path: /data
+        context: ./rpm
+        push: false
+        tags: pamoauth2device-rpm-build:latest
+    - uses: addnab/docker-run-action@v3
+      with:
+        image: pamoauth2device-rpm-build:latest
+        options: -v ${{ github.workspace }}:/data
+        run: |
+          cp -r rpmbuild/RPMS /data
+          cat /data
