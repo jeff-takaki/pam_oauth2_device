@@ -10,23 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    -
-      name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-    -
-      name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    -
-      name: Build and push
-      uses: docker/build-push-action@v4
-      with:
-        context: ./packaging/rpm
-        push: false
-        tags: pamoauth2device-rpm-build:latest
-    - uses: addnab/docker-run-action@v3
-      with:
-        image: pamoauth2device-rpm-build:latest
-        options: -v ${{ github.workspace }}:/data
-        run: |
-          cp -r rpmbuild/RPMS /data
-          cat /data
+    - name: Build docker images
+      run: docker build -t local < ./packaging/rpm/Dockerfile
+    
+    - name: Run tests
+      run: docker run -it --rm -v ${PWD}:/data cp -r rpmbuild/RPMS /data
+  
