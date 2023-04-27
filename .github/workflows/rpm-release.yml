@@ -17,7 +17,7 @@ jobs:
           cd ./packaging/rpm
           echo $USER
            docker build -t pamoauth2device-rpm-build .
-           sudo chown $USER /data/RPMS
+           sudo chown $USER /data
            docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
            
     - name: Upload artifact
