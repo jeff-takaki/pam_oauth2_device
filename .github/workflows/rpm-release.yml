@@ -17,8 +17,9 @@ jobs:
           cd ./packaging/rpm
           echo $USER
           docker build -t pamoauth2device-rpm-build .
-          docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build 
           docker exec -t -i pamoauth2device-rpm-build /bin/bash
+          docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build 
+  
 
            
     - name: Upload artifact
