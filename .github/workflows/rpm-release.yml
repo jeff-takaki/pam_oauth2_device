@@ -5,10 +5,7 @@ on:
   #release:
     #types: [created]
 
-
 permissions: write-all
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,8 +17,8 @@ jobs:
       run: |
           cd ./packaging/rpm
           echo $USER
-           #docker build -t pamoauth2device-rpm-build .
-           #docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
+           docker build -t pamoauth2device-rpm-build .
+           docker run --rm -v ${PWD}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
            
     - name: Upload artifact
       uses: actions/upload-artifact@v3
