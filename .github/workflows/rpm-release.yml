@@ -15,10 +15,8 @@ jobs:
       id: rpm
       run: |
           cd ./packaging/rpm
-          chown <uid>:<gid> .
-          whoami
            #docker build -t pamoauth2device-rpm-build .
-           #docker run --rm -v ${{ github.workspace }}:/data pamoauth2device-rpm-build:latest cp -r /home/builder/rpmbuild/RPMS/x86_64/pamoauth2device-0.1-1.el7.x86_64.rpm /data
+           #docker run --rm -v ${{ github.workspace }}:/data pamoauth2device-rpm-build:latest cp -r rpmbuild/RPMS /data
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
