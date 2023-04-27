@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build docker images
-      run: docker build -t local < ./packaging/rpm/Dockerfile
+      run: docker build -t local < .packaging/rpm/Dockerfile
     
     - name: Run tests
       run: docker run -it --rm -v ${PWD}:/data cp -r rpmbuild/RPMS /data
