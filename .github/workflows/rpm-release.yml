@@ -16,7 +16,8 @@ jobs:
           export GITHUB_UID=$(id -u)
           export GITHUB_GID=$(id -g)
           docker build -t pamoauth2device-rpm-build .
-          docker run --rm -u runner -v ${{github.workspace}}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
+          docker run -v ${{github.workspace}}:/data pamoauth2device-rpm-build 
+          docker inspect $(docker ps -q) --format '{{.Config.User}} {{.Name}}'
     
     - name: Upload RPMS
       uses: actions/upload-artifact@v3
