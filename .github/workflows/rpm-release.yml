@@ -15,5 +15,10 @@ jobs:
       run: |
           cd ./packaging/rpm
           docker build -t pamoauth2device-rpm-build .
-          docker run --rm -u builder -v ${{github.workspace}}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
-        
+          docker run --rm -u root -v ${{github.workspace}}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PAM oauth2 RPMs
+        path: /data
