@@ -10,15 +10,15 @@ RUN yum install -y \
     rpm-build \
  && yum clean all
 
-RUN groupadd runner \
- && useradd --create-home --gid runner runner
+RUN groupadd builder \
+ && useradd --create-home --gid builder builder
 
-USER runner
+USER builder
 
 # This version must be identical to the version in pamoauth2device.spec
 ENV PACKAGE_VERSION=0.1
 
-WORKDIR /home/runner
+WORKDIR /home/builder
 
 RUN mkdir -p rpmbuild/SOURCES \
  && cd rpmbuild/SOURCES \
@@ -28,8 +28,8 @@ COPY pamoauth2device.spec .
 
 USER root
 
-RUN chown runner:runner pamoauth2device.spec
+RUN chown builder:builder pamoauth2device.spec
 
-USER runner
+USER builder
 
 RUN rpmbuild -ba pamoauth2device.spec
