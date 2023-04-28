@@ -3,22 +3,21 @@ name: build rpm on release
 on:
   push:
   #release:
-    #types: [created]
+    #types: [published]
 
 jobs:
-  build:
+  Build-RPMS:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: build rpm 
-      id: rpm
+    - name: Build RPMS 
       run: |
           cd ./packaging/rpm
           docker build -t pamoauth2device-rpm-build .
           docker run --rm -u root -v ${{github.workspace}}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
     
-    - name: Upload artifact
+    - name: Upload RPMS
       uses: actions/upload-artifact@v3
       with:
-        name: PAM oauth2 RPMs
+        name: PAM OAuth2 RPMS
         path: ${{github.workspace}}/RPMS
