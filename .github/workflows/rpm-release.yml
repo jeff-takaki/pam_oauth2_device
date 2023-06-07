@@ -13,7 +13,7 @@ jobs:
     - name: Set up build directory
       run: |
         mkdir -p ${{github.workspace}}/build_output
-        sudo chown -R ${{github.actor}}:${{github.actor}} ${{github.workspace}}/build_output
+        sudo chown -R ${{github.actor}} ${{github.workspace}}/build_output
 
     - name: Build RPMS 
       run: |
