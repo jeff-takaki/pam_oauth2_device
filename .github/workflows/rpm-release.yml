@@ -3,7 +3,7 @@ name: build rpm on release
 on:
   push:
   #release:
-    #types: [published] #hello?
+    #types: [published] 
 
 jobs:
   Build-RPMS:

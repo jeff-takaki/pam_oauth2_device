@@ -11,7 +11,7 @@ RUN yum install -y \
  && yum clean all
 
 RUN groupadd builder \
- && useradd -u 1000:1000 --create-home --gid builder builder
+ && useradd --create-home --uid 1000 --gid 1000 builder builder
 
 USER builder
 
