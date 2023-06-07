@@ -20,7 +20,7 @@ jobs:
       run: |
         cd ./packaging/rpm
         docker build -t pamoauth2device-rpm-build .
-        docker run --rm --u 1000:1000 -v ${{github.workspace}}/build_output:/data pamoauth2device-rpm-build:latest --user builder cp -r rpmbuild/RPMS /data
+        docker run --rm -u 1000:1000 -v ${{github.workspace}}/build_output:/data pamoauth2device-rpm-build:latest --user builder cp -r rpmbuild/RPMS /data
   
     - name: Upload RPMS
       uses: actions/upload-artifact@v3
