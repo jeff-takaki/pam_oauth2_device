@@ -14,15 +14,15 @@ jobs:
       run: |
         mkdir -p ${{github.workspace}}/build_output
         sudo chown 1000:1000 ${{github.workspace}}/build_output
-        
+
     - name: Build RPMS 
       run: |
           cd ./packaging/rpm
           docker build -t pamoauth2device-rpm-build .
-          docker run --rm -u root -v ${{github.workspace}}:/data pamoauth2device-rpm-build cp -r rpmbuild/RPMS /data
+          docker run --rm -u 1000:1000 --user builder -v ${{github.workspace}}/build_output:/data pamoauth2device-rpm-build:latest cp -r rpmbuild/RPMS /data
           
     - name: Upload RPMS
       uses: actions/upload-artifact@v3
       with:
         name: PAM OAuth2 RPMS
-        path: ${{github.workspace}}/RPMS
+        path: build_output/RPMS
