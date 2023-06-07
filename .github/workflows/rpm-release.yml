@@ -12,18 +12,6 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up build directory
       run: |
-        mkdir -p ${{github.workspace}}/build_output
-
-    - name: Build RPMS 
-      run: |
-        cd ./packaging/rpm
-        export GITHUB_UID=$(id -u)
-        export GITHUB_GID=$(id -g)
-        docker build -t pamoauth2device-rpm-build .
-        docker run --rm -v ${{github.workspace}}/build_output:/data pamoauth2device-rpm-build --user builder cp -r rpmbuild/RPMS /data
-
-    - name: Upload RPMS
-      uses: actions/upload-artifact@v3
-      with:
-        name: PAM OAuth2 RPMS
-        path: ${{github.workspace}}/build_output/RPMS
+        mkdir ${{github.workspace}}/build_output
+        sudo chown 1000:1000 ${{github.workspace}}/build_output
+        sudo stat --printf="UID: %u\nGID: %g\n" ${{github.workspace}}/build_output
